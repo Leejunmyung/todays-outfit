@@ -1,10 +1,10 @@
 import React from 'react';
-import Weather from './pages/Weather/CWeather.tsx/CWeather';
+import Home from './pages/Home/HomeContainer';
 
 function App() {
   return (
     <>
-      <Weather />
+      <Home />
     </>
   );
 }

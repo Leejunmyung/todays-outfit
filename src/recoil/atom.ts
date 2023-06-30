@@ -1,6 +1,10 @@
 import { atom } from 'recoil';
+import { LocationState } from './type';
 
-export const textState = atom({
-  key: 'textState',
-  default: '',
+export const currentLocation = atom<LocationState>({
+  key: 'currentLocation',
+  default: {
+    lat: 0,
+    lon: 0,
+  },
 });

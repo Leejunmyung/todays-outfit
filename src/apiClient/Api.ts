@@ -6,6 +6,6 @@ export const getCurrentWeather = async (weatherParams: WeatherParams) => {
     lat: weatherParams.lat,
     lon: weatherParams.lon,
   };
-  const result = await baseApi.get(`/current`, { params });
-  return result.data.data[0];
+  const result = await baseApi.get(`/weather`, { params });
+  return result.data.data;
 };

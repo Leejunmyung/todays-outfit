@@ -1,9 +1,19 @@
-import { QueryKey, useQuery } from '@tanstack/react-query';
+import { QueryKey, useMutation, useQuery } from '@tanstack/react-query';
 import { getCurrentWeather } from './Api';
 import { WeatherData, WeatherParams } from './type';
+import { useRecoilValue } from 'recoil';
+import { currentLocation } from '../recoil/atom';
 
-export const useGetWeather = (weatherParams: WeatherParams) => {
-  const querykey: QueryKey = ['CurrentWeather'];
-  const { data, isLoading, error } = useQuery<WeatherData>(querykey, () => getCurrentWeather(weatherParams));
-  return [isLoading, data, error];
+// export const useGetWeather = () => {
+//   const weatherParams = useRecoilValue(currentLocation);
+//   return useQuery<WeatherData, QueryKey>(['weather'], () => {
+//     return getCurrentWeather(weatherParams);
+//   });
+// };
+
+export const useGetWeather = () => {
+  return useMutation(async (params: WeatherParams) => {
+    const result = await getCurrentWeather(params);
+    return result;
+  });
 };

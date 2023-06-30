@@ -1,49 +1,48 @@
 export interface WeatherParams {
-  lat: number;
-  lon: number;
+  lat: number | undefined;
+  lon: number | undefined;
 }
 
 export interface WeatherData {
-  app_temp: number;
-  aqi: number;
-  city_name: string;
-  clouds: number;
-  country_code: string;
-  datetime: string;
-  dwept: number;
-  dhi: number;
-  dni: number;
-  elev_angle: number;
-  ghi: number;
-  gust: number | undefined;
-  h_angle: number;
-  lat: number;
-  lon: number;
-  ob_time: string;
-  pod: string;
-  precip: number;
-  pres: number;
-  rh: number;
-  slp: number;
-  snow: number;
-  solar_rad: number;
-  sources: [string];
-  state_code: string;
-  station: string;
-  sunrise: string;
-  sunset: string;
-  temp: number;
-  timezone: string;
-  ts: number;
-  uv: number;
-  vis: number;
-  weather: {
-    code: number;
-    description: string;
-    icon: string;
+  base: string;
+  clouds: {
+    all: number;
   };
-  wind_cdir: string;
-  wind_cdir_full: string;
-  wind_dir: number;
-  wind_spd: number;
+  cod: number;
+  coord: {
+    lat: number;
+    lon: number;
+  };
+  dt: number;
+  id: number;
+  main: {
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+  };
+  name: string;
+  sys: {
+    country: string;
+    id: number;
+    sunrise: number;
+    sunset: number;
+    type: number;
+  };
+  timezone: number;
+  visibility: number;
+  weather: Weather[];
+  wind: {
+    speed: number;
+    deg: number;
+  };
+}
+
+export interface Weather {
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
 }
