@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { WeatherData } from '../../apiClient/type';
 
 interface HomePresenterProps {
-  // data: WeatherData | undefined;
+  data: WeatherData | undefined;
   getCurrentWeather: () => void;
 }
 
-const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
+const HomePresenter = ({ data, getCurrentWeather }: HomePresenterProps) => {
   return (
     <>
       <Container>
@@ -18,7 +18,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
               <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon2.png" />
             </TopDetailWrapper>
             <MiddleDetailWrapper>
-              <Temperature>28℃</Temperature>
+              <Temperature>{data?.main.temp}℃</Temperature>
               <Weather>맑음</Weather>
             </MiddleDetailWrapper>
             <BottomDetailWrapper>

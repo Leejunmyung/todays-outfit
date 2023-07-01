@@ -7,5 +7,5 @@ export const getCurrentWeather = async (weatherParams: WeatherParams) => {
     lon: weatherParams.lon,
   };
   const result = await baseApi.get(`/weather`, { params });
-  return result.data.data;
+  return result.data;
 };

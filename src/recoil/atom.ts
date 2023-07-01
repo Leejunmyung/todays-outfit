@@ -4,7 +4,7 @@ import { LocationState } from './type';
 export const currentLocation = atom<LocationState>({
   key: 'currentLocation',
   default: {
-    lat: 0,
-    lon: 0,
+    lat: 37.566535,
+    lon: 126.9779692,
   },
 });
