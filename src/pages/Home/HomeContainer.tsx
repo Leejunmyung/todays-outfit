@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HomePresenter from './HomePresenter';
-import { useGetWeather } from '../../apiClient/Queries';
+import { useGetPollution, useGetWeather } from '../../apiClient/Queries';
 import { useGeoLocation } from '../../utils/hooks/useGeoLocation';
-import { WeatherData } from '../../apiClient/type';
 
 const HomeContainer = () => {
   const geolocationOptions = {
@@ -11,14 +10,16 @@ const HomeContainer = () => {
     maximumAge: 1000 * 3600 * 24,
   };
   useGeoLocation(geolocationOptions);
-  const { isLoading, data, refetch } = useGetWeather();
+  const { isLoading: weatherLoading, data: weatherData, refetch: weatherRefetch } = useGetWeather();
+  const { isLoading: airLoading, data: airData, refetch: airRefetch } = useGetPollution();
   const getCurrentWeather = () => {
-    refetch();
+    weatherRefetch();
+    airRefetch();
   };
-  if (isLoading) {
+  if (weatherLoading && airLoading) {
     return <div>로딩중..</div>;
   }
 
-  return <HomePresenter data={data} getCurrentWeather={getCurrentWeather} />;
+  return <HomePresenter data={weatherData} getCurrentWeather={getCurrentWeather} />;
 };
 export default HomeContainer;

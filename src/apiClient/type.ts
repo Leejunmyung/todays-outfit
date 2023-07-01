@@ -1,4 +1,4 @@
-export interface WeatherParams {
+export interface LocationParams {
   lat: number | undefined;
   lon: number | undefined;
 }
@@ -45,4 +45,29 @@ export interface Weather {
   icon: string;
   id: number;
   main: string;
+}
+
+export interface AirPollutionData {
+  coord: {
+    lon: number;
+    lat: number;
+  };
+  list: List[];
+}
+
+export interface List {
+  main: {
+    aqi: number;
+  };
+  components: {
+    co: number;
+    no: number;
+    no2: number;
+    o3: number;
+    so2: number;
+    pm2_5: number;
+    pm10: number;
+    nh3: number;
+  };
+  dt: number;
 }
