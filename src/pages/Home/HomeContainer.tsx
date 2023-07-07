@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import HomePresenter from './HomePresenter';
 import { useGetPollution, useGetWeather } from '../../apiClient/Queries';
 import { useGeoLocation } from '../../utils/hooks/useGeoLocation';
+import { weatherData, airPollutionData } from '../../recoil/atom';
+import { useSetRecoilState } from 'recoil';
 
 const HomeContainer = () => {
+  const setWeatherData = useSetRecoilState(weatherData);
+  const setAirPollutionData = useSetRecoilState(airPollutionData);
   const geolocationOptions = {
     enableHighAccuracy: true,
     timeout: 1000 * 10,
     maximumAge: 1000 * 3600 * 24,
   };
-  useGeoLocation(geolocationOptions);
-  const { isLoading: weatherLoading, data: weatherData, refetch: weatherRefetch } = useGetWeather();
-  const { isLoading: airLoading, data: airData, refetch: airRefetch } = useGetPollution();
+  const { isLoading: weatherLoading, data: weather, refetch: weatherRefetch } = useGetWeather();
+  const { isLoading: airLoading, data: airPollution, refetch: airRefetch } = useGetPollution();
   const getCurrentWeather = () => {
     weatherRefetch();
     airRefetch();
   };
+  useGeoLocation(geolocationOptions);
+  useEffect(() => {
+    if (weather && airPollution !== undefined) {
+      setWeatherData(weather);
+      setAirPollutionData(airPollution);
+    }
+  }, [weather, airPollution]);
   if (weatherLoading && airLoading) {
     return <div>로딩중..</div>;
   }
 
-  return <HomePresenter data={weatherData} getCurrentWeather={getCurrentWeather} />;
+  return <HomePresenter getCurrentWeather={getCurrentWeather} />;
 };
 export default HomeContainer;

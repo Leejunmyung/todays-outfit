@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { LocationState } from './type';
-import { WeatherData } from '../apiClient/type';
+import { AirPollutionData, WeatherData } from '../apiClient/type';
 
 export const currentLocation = atom<LocationState>({
   key: 'currentLocation',
@@ -15,4 +15,7 @@ export const weatherData = atom<WeatherData | null>({
   default: null,
 });
 
-// export const pollutionData
+export const airPollutionData = atom<AirPollutionData | null>({
+  key: 'airPollutionData',
+  default: null,
+});

@@ -1,24 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { WeatherData } from '../../apiClient/type';
-
+import { currentDate, airPollutionLevel } from '../../recoil/selector';
+import { useRecoilValue } from 'recoil';
+import { weatherData } from '../../recoil/atom';
 interface HomePresenterProps {
-  data: WeatherData | undefined;
   getCurrentWeather: () => void;
 }
 
-const HomePresenter = ({ data, getCurrentWeather }: HomePresenterProps) => {
+const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
+  const { date, sunSet } = useRecoilValue(currentDate);
+  const { fineDust, ulFineDust } = useRecoilValue(airPollutionLevel);
   return (
     <>
       <Container>
         <WeatherCardWrapper>
+          <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon5.png" />
           <WeatherDetailWrapper>
             <TopDetailWrapper>
-              <Area>서울특별시</Area>
-              <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon2.png" />
+              <Date>{date}</Date>
+              <AreaWrapper>
+                <Area>서울특별시</Area>
+              </AreaWrapper>
             </TopDetailWrapper>
             <MiddleDetailWrapper>
-              <Temperature>{data?.main.temp}℃</Temperature>
+              <Temperature>28℃</Temperature>
               <Weather>맑음</Weather>
             </MiddleDetailWrapper>
             <BottomDetailWrapper>
@@ -29,7 +34,7 @@ const HomePresenter = ({ data, getCurrentWeather }: HomePresenterProps) => {
                 </AdditionalInfo>
                 <AdditionalInfo>
                   <Desc>미세</Desc>
-                  <Info color="#3f62e8">좋음</Info>
+                  <Info color={fineDust === '좋음' || fineDust === '보통' ? '#3f62e8' : '#e83f3f'}>{fineDust}</Info>
                 </AdditionalInfo>
               </AdditionalInfoPack>
               <AdditionalInfoPack>
@@ -39,7 +44,9 @@ const HomePresenter = ({ data, getCurrentWeather }: HomePresenterProps) => {
                 </AdditionalInfo>
                 <AdditionalInfo>
                   <Desc>초미세</Desc>
-                  <Info color="#e83f3f">좋음</Info>
+                  <Info color={ulFineDust === '좋음' || ulFineDust === '보통' ? '#3f62e8' : '#e83f3f'}>
+                    {ulFineDust}
+                  </Info>
                 </AdditionalInfo>
               </AdditionalInfoPack>
               <AdditionalInfoPack>
@@ -49,7 +56,7 @@ const HomePresenter = ({ data, getCurrentWeather }: HomePresenterProps) => {
                 </AdditionalInfo>
                 <AdditionalInfo>
                   <Desc>일몰</Desc>
-                  <Info>19:54</Info>
+                  <Info>{sunSet}</Info>
                 </AdditionalInfo>
               </AdditionalInfoPack>
             </BottomDetailWrapper>
@@ -75,6 +82,7 @@ const Container = styled.div`
 `;
 
 const WeatherCardWrapper = styled.div`
+  position: relative;
   min-width: 330px;
   max-width: 726px;
   width: 80vw;
@@ -122,11 +130,26 @@ const WeatherIcon = styled.img`
 `;
 
 const LocationIcon = styled.img`
+  position: absolute;
+  right: 8px;
+  top: 10px;
   width: 8vw;
   cursor: pointer;
 `;
 
+const Date = styled.div`
+  color: #696666;
+  font-size: 3vw;
+  font-weight: 600;
+`;
+
 const TopDetailWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+`;
+
+const AreaWrapper = styled.div`
   display: flex;
 `;
 
@@ -154,7 +177,6 @@ const AdditionalInfo = styled.div`
 
 const Area = styled.p`
   font-size: 6vw;
-  font-weight: 600;
 `;
 
 const Temperature = styled.p`
@@ -170,15 +192,13 @@ const Weather = styled.p`
 
 const Desc = styled.p`
   font-size: 3.2vw;
-  color: #8f8e8e;
-  font-weight: 500;
+  color: #696666;
 `;
 
 const Info = styled.p<{ color?: string }>`
   font-size: 3vw;
-  font-weight: 600;
   line-height: calc(3.5vw + 2px);
-  color: ${(props) => (props.color ? props.color : '#33333')};
+  color: ${(props) => props.color};
 `;
 
 export default HomePresenter;
