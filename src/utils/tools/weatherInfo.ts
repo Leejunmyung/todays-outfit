@@ -27,4 +27,34 @@ export const weatherInfo = {
       default:
     }
   },
+  weatherImageJudge(weather: string | undefined) {
+    if (weather === undefined) return;
+    switch (weather) {
+      case 'Clear':
+        return 'img/weather/Clear.png';
+      case 'Clouds':
+        return 'img/weather/Clouds.png';
+      case 'Thunderstorm':
+        return 'img/weather/Thunderstorm.png';
+      case 'Snow':
+        return 'img/weather/Snow.png';
+      case 'Rain':
+        return 'img/weather/Rain.png';
+      case 'Drizzle':
+        return 'img/weather/Drizzle.png';
+      case 'Mist' || 'Haze' || 'Fog' || 'Smoke':
+        return 'img/weather/Mist.png';
+      case 'Dust' || 'Ash' || 'Sand':
+        return 'img/weather/Dust.png';
+      case 'Squall':
+        return 'img/weather/Squall.png';
+      case 'Tornado':
+        return 'img/weather/Tornado.png';
+      default:
+        return 'img/weather/Clear.png';
+    }
+  },
+  weatherBackground() {
+    return;
+  },
 };

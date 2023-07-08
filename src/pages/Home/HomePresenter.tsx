@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { currentDate, airPollutionLevel } from '../../recoil/selector';
+import { currentDate, airPollutionLevel, weatherImage } from '../../recoil/selector';
 import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
 interface HomePresenterProps {
@@ -10,6 +10,8 @@ interface HomePresenterProps {
 const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
   const { date, sunSet } = useRecoilValue(currentDate);
   const { fineDust, ulFineDust } = useRecoilValue(airPollutionLevel);
+  const weatherImg = useRecoilValue(weatherImage);
+  const weathers = useRecoilValue(weatherData);
   return (
     <>
       <Container>
@@ -19,18 +21,18 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
             <TopDetailWrapper>
               <Date>{date}</Date>
               <AreaWrapper>
-                <Area>서울특별시</Area>
+                <Area>{weathers?.name}</Area>
               </AreaWrapper>
             </TopDetailWrapper>
             <MiddleDetailWrapper>
-              <Temperature>28℃</Temperature>
-              <Weather>맑음</Weather>
+              <Temperature>{weathers?.main.temp}℃</Temperature>
+              <Weather>{weathers?.weather[0].description}</Weather>
             </MiddleDetailWrapper>
             <BottomDetailWrapper>
               <AdditionalInfoPack>
                 <AdditionalInfo>
                   <Desc>습도</Desc>
-                  <Info>42%</Info>
+                  <Info>{weathers?.main.humidity}%</Info>
                 </AdditionalInfo>
                 <AdditionalInfo>
                   <Desc>미세</Desc>
@@ -40,7 +42,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
               <AdditionalInfoPack>
                 <AdditionalInfo>
                   <Desc>체감</Desc>
-                  <Info>24.2º</Info>
+                  <Info>{weathers?.main.feels_like}º</Info>
                 </AdditionalInfo>
                 <AdditionalInfo>
                   <Desc>초미세</Desc>
@@ -52,7 +54,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
               <AdditionalInfoPack>
                 <AdditionalInfo>
                   <Desc>서풍</Desc>
-                  <Info>3.1m/s</Info>
+                  <Info>{weathers?.wind.speed}m/s</Info>
                 </AdditionalInfo>
                 <AdditionalInfo>
                   <Desc>일몰</Desc>
@@ -62,7 +64,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
             </BottomDetailWrapper>
           </WeatherDetailWrapper>
           <WeatherIconWrapper>
-            <WeatherIcon loading="lazy" src="img/weather/Clear.png" />
+            <WeatherIcon loading="lazy" src={weatherImg} />
           </WeatherIconWrapper>
         </WeatherCardWrapper>
         <ClothesCardWrapper></ClothesCardWrapper>
@@ -154,7 +156,7 @@ const AreaWrapper = styled.div`
 `;
 
 const MiddleDetailWrapper = styled.div`
-  padding: 0px 10px;
+  padding: 0px 5px;
   display: flex;
   gap: 15px;
 `;
@@ -180,12 +182,12 @@ const Area = styled.p`
 `;
 
 const Temperature = styled.p`
-  font-size: 9vw;
+  font-size: 8vw;
   font-weight: 500;
 `;
 
 const Weather = styled.p`
-  font-size: 5vw;
+  font-size: 4vw;
   font-weight: 600;
   line-height: 11vw;
 `;

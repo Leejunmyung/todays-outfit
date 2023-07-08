@@ -3,11 +3,11 @@ import HomePresenter from './HomePresenter';
 import { useGetPollution, useGetWeather } from '../../apiClient/Queries';
 import { useGeoLocation } from '../../utils/hooks/useGeoLocation';
 import { weatherData, airPollutionData } from '../../recoil/atom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 const HomeContainer = () => {
-  const setWeatherData = useSetRecoilState(weatherData);
-  const setAirPollutionData = useSetRecoilState(airPollutionData);
+  const [, setWeathersData] = useRecoilState(weatherData);
+  const [, setAirPollutionData] = useRecoilState(airPollutionData);
   const geolocationOptions = {
     enableHighAccuracy: true,
     timeout: 1000 * 10,
@@ -22,7 +22,7 @@ const HomeContainer = () => {
   useGeoLocation(geolocationOptions);
   useEffect(() => {
     if (weather && airPollution !== undefined) {
-      setWeatherData(weather);
+      setWeathersData(weather);
       setAirPollutionData(airPollution);
     }
   }, [weather, airPollution]);

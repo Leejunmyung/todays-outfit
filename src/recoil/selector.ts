@@ -22,3 +22,12 @@ export const airPollutionLevel = selector({
     return { fineDust, ulFineDust };
   },
 });
+
+export const weatherImage = selector({
+  key: 'weatherImage',
+  get: ({ get }) => {
+    const allWeatherData = get(weatherData);
+    const weather = weatherInfo.weatherImageJudge(allWeatherData?.weather[0].main);
+    return weather;
+  },
+});
