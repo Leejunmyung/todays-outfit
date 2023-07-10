@@ -8,8 +8,8 @@ export const weatherInfo = {
         return '보통';
       case pm > 80:
         return '나쁨';
-      case pm > 150:
-        return '매우나쁨';
+      // case pm > 150:
+      //   return '매우나쁨';
       default:
     }
   },
@@ -22,8 +22,8 @@ export const weatherInfo = {
         return '보통';
       case ulpm > 35:
         return '나쁨';
-      case ulpm > 75:
-        return '매우나쁨';
+      // case ulpm > 75:
+      //   return '매우나쁨';
       default:
     }
   },
@@ -54,7 +54,19 @@ export const weatherInfo = {
         return 'img/weather/Clear.png';
     }
   },
-  weatherBackground() {
-    return;
+  weatherBackgroundJudge(weather: string | undefined) {
+    if (weather === undefined) return;
+    switch (weather) {
+      case 'Clouds' || 'Rain' || 'Thunderstorm' || 'Tornado' || 'Squall' || 'Snow':
+        return '#646C78';
+      case 'Clear':
+        return '#fff7b1';
+      case 'Dust' || 'Ash' || 'Sand':
+        return '#B9A894';
+      case 'Mist' || 'Haze' || 'Fog' || 'Smoke':
+        return '#9D9DA3';
+      default:
+        return '#fff7b1';
+    }
   },
 };

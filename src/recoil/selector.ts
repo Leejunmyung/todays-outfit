@@ -31,3 +31,12 @@ export const weatherImage = selector({
     return weather;
   },
 });
+
+export const weatherBackground = selector({
+  key: 'weatherBackground',
+  get: ({ get }) => {
+    const allWeatherData = get(weatherData);
+    const background = weatherInfo.weatherBackgroundJudge(allWeatherData?.weather[0].main);
+    return background;
+  },
+});

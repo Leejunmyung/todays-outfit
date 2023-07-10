@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { currentDate, airPollutionLevel, weatherImage } from '../../recoil/selector';
+import { currentDate, airPollutionLevel, weatherImage, weatherBackground } from '../../recoil/selector';
 import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
 interface HomePresenterProps {
@@ -11,11 +11,12 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
   const { date, sunSet } = useRecoilValue(currentDate);
   const { fineDust, ulFineDust } = useRecoilValue(airPollutionLevel);
   const weatherImg = useRecoilValue(weatherImage);
+  const weatherBg = useRecoilValue(weatherBackground);
   const weathers = useRecoilValue(weatherData);
   return (
     <>
       <Container>
-        <WeatherCardWrapper>
+        <WeatherCardWrapper backgroundColor={weatherBg}>
           <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon5.png" />
           <WeatherDetailWrapper>
             <TopDetailWrapper>
@@ -83,13 +84,14 @@ const Container = styled.div`
   padding: 30px;
 `;
 
-const WeatherCardWrapper = styled.div`
+const WeatherCardWrapper = styled.div<{ backgroundColor?: string }>`
   position: relative;
   min-width: 330px;
   max-width: 726px;
   width: 80vw;
   height: 50vw;
-  background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #fff7b1 0%, rgba(255, 255, 255, 0) 71.88%), #ffffff; //#8ec9ed
+  background: ${(props) =>
+    `radial-gradient(178.94% 106.41% at 75.42% 106.41%, ${props.backgroundColor} 0%, rgba(255, 255, 255, 0) 71.88%), #ffffff`};
   border-radius: 20px;
   box-shadow: 5px 9px 29px rgba(0, 0, 0, 0.22);
   padding: 20px;
