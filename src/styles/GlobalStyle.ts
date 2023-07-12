@@ -7,8 +7,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background: #e9ecef;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #EDF5FB;
+    font-family: 'Gothic A1', sans-serif;
   }
 
   li {
