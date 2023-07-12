@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { currentDate, airPollutionLevel, weatherImage, weatherBackground } from '../../recoil/selector';
+import { currentDate, airPollutionLevel, weatherImage, weatherBackground, getClothesInfo } from '../../recoil/selector';
 import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
+import ScrollVelocity from '../../components/ScrollVelocity';
 interface HomePresenterProps {
   getCurrentWeather: () => void;
 }
@@ -13,10 +14,11 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
   const weatherImg = useRecoilValue(weatherImage);
   const weatherBg = useRecoilValue(weatherBackground);
   const weathers = useRecoilValue(weatherData);
+  const clothes = useRecoilValue(getClothesInfo);
   return (
     <>
       <Container>
-        <WeatherCardWrapper backgroundColor={weatherBg}>
+        <WeatherCardWrapper background={weatherBg}>
           <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon5.png" />
           <WeatherDetailWrapper>
             <TopDetailWrapper>
@@ -68,7 +70,23 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
             <WeatherIcon loading="lazy" src={weatherImg} />
           </WeatherIconWrapper>
         </WeatherCardWrapper>
-        <ClothesCardWrapper></ClothesCardWrapper>
+        <ClothesCardWrapper>
+          <ClothesTitle>오늘 뭐 입지?</ClothesTitle>
+          <ScrollWrapper>
+            <ScrollVelocity baseVelocity={-10}>
+              <ClothesBox>
+                {clothes?.map((c, i) => {
+                  return (
+                    <ClothesPack key={i}>
+                      <ClothesIcon loading="lazy" src={`img/clothes/` + c.clothes} />
+                      <ClothesName>{c.name}</ClothesName>
+                    </ClothesPack>
+                  );
+                })}
+              </ClothesBox>
+            </ScrollVelocity>
+          </ScrollWrapper>
+        </ClothesCardWrapper>
       </Container>
     </>
   );
@@ -81,10 +99,10 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 30px 25px;
 `;
 
-const WeatherCardWrapper = styled.div<{ backgroundColor?: string }>`
+const WeatherCardWrapper = styled.div<{ background?: string }>`
   position: relative;
   min-width: 330px;
   max-width: 726px;
@@ -92,7 +110,7 @@ const WeatherCardWrapper = styled.div<{ backgroundColor?: string }>`
   height: 50vw;
   background: ${(props) =>
     `radial-gradient(178.94% 106.41% at 75.42% 106.41%, ${
-      props.backgroundColor ? props.backgroundColor : '#fff7b1'
+      props.background ? props.background : '#fff7b1'
     } 0%, rgba(255, 255, 255, 0) 71.88%), #ffffff`};
   border-radius: 20px;
   box-shadow: 5px 9px 29px rgba(0, 0, 0, 0.22);
@@ -109,12 +127,48 @@ const ClothesCardWrapper = styled.div`
   min-width: 330px;
   max-width: 726px;
   width: 80vw;
-  height: 60vw;
-  background: #ffffff;
+  height: auto;
+  background: #f7f9eb;
   border-radius: 20px;
   box-shadow: 5px 9px 29px rgba(0, 0, 0, 0.22);
   padding: 20px;
+  /* flex-wrap: wrap; */
+`;
+
+const ScrollWrapper = styled.div`
+  overflow: hidden;
+`;
+
+const ClothesBox = styled.div`
+  margin-top: 10px;
   display: flex;
+  gap: 10px;
+`;
+
+const ClothesPack = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 15px;
+`;
+
+const ClothesTitle = styled.div`
+  font-size: 6vw;
+  font-weight: 600;
+`;
+
+const ClothesName = styled.div`
+  color: #696666;
+  font-size: 4.5vw;
+  font-weight: 600;
+`;
+
+const ClothesIcon = styled.img`
+  width: 21vw;
 `;
 
 const WeatherDetailWrapper = styled.div`
@@ -132,7 +186,7 @@ const WeatherIconWrapper = styled.div`
 `;
 
 const WeatherIcon = styled.img`
-  width: calc(100px + 2vw);
+  width: 21vw;
 `;
 
 const LocationIcon = styled.img`
