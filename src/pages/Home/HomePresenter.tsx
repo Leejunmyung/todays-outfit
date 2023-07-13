@@ -71,7 +71,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
           </WeatherIconWrapper>
         </WeatherCardWrapper>
         <ClothesCardWrapper>
-          <ClothesTitle>오늘 뭐 입지?</ClothesTitle>
+          <ClothesTitle>Today&apos;s outfit</ClothesTitle>
           <ScrollWrapper>
             <ScrollVelocity baseVelocity={-10}>
               <ClothesBox>
@@ -128,10 +128,12 @@ const ClothesCardWrapper = styled.div`
   max-width: 726px;
   width: 80vw;
   height: auto;
-  background: #f7f9eb;
+  background: #00ffa0;
   border-radius: 20px;
-  box-shadow: 5px 9px 29px rgba(0, 0, 0, 0.22);
+  box-shadow: 4px 4px #05060f;
+  /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
   padding: 20px;
+  border: 4px solid #05060f;
   /* flex-wrap: wrap; */
 `;
 
@@ -150,19 +152,20 @@ const ClothesPack = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #333333;
+  border: 2px solid #664eff;
   border-radius: 10px;
   padding: 10px;
   gap: 15px;
 `;
 
 const ClothesTitle = styled.div`
+  color: #05060f;
   font-size: 6vw;
   font-weight: 600;
 `;
 
 const ClothesName = styled.div`
-  color: #696666;
+  color: #05060f;
   font-size: 4.5vw;
   font-weight: 600;
 `;

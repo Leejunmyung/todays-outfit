@@ -25,7 +25,7 @@ const HomeContainer = () => {
       setWeathersData(weather);
       setAirPollutionData(airPollution);
     }
-  }, [weather, airPollution]);
+  }, [weather, airPollution, getCurrentWeather]);
   if (weatherLoading && airLoading) {
     return <div>로딩중..</div>;
   }
