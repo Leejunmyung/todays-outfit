@@ -9,6 +9,7 @@ import {
   useMotionValue,
   useVelocity,
   useAnimationFrame,
+  useCycle,
 } from 'framer-motion';
 import { wrap } from '@motionone/utils';
 
@@ -28,7 +29,7 @@ const ScrollVelocity = ({ children, baseVelocity = 100 }: ScrollVelocityProps) =
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
     clamp: false,
   });
-  const x = useTransform(baseX, (v) => `${wrap(-0, -90, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
 
   const directionFactor = useRef<number>(1);
   useAnimationFrame((t, delta) => {
@@ -44,9 +45,19 @@ const ScrollVelocity = ({ children, baseVelocity = 100 }: ScrollVelocityProps) =
 
     baseX.set(baseX.get() + moveBy);
   });
-  return <Scroller style={{ x }}>{children}</Scroller>;
+  return (
+    <Scroller style={{ x }}>
+      <span>{children}</span>
+      <span>{children}</span>
+      <span>{children}</span>
+      <span>{children}</span>
+    </Scroller>
+  );
 };
 
-const Scroller = styled(motion.div)``;
+const Scroller = styled(motion.div)`
+  display: flex;
+  width: max-content;
+`;
 
 export default ScrollVelocity;
