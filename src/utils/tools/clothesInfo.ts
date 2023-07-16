@@ -16,7 +16,7 @@ export const clothesInfo = {
       long_sleeves: 'long_sleeves.png',
       mtm: 'mtm.png',
       shirts: 'shirts.png',
-      short_shirts: 'short_shirts.png',
+      short_shirt: 'short_shirt.png',
       short_sleeve: 'short_sleeve.png',
       sleeveless: 'sleeveless_shirt.png',
       tank_top: 'tank_top.png',
@@ -42,7 +42,7 @@ export const clothesInfo = {
       case tempt > 23:
         return [
           { name: '반팔티', clothes: clothes.short_sleeve },
-          { name: '반팔셔츠', clothes: clothes.short_shirts },
+          { name: '반팔셔츠', clothes: clothes.short_shirt },
           { name: '숏팬츠', clothes: clothes.short_pants },
           { name: '치마', clothes: clothes.skirt },
         ];

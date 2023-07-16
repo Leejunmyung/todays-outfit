@@ -42,9 +42,14 @@ export const weatherInfo = {
         return 'img/weather/Rain.png';
       case 'Drizzle':
         return 'img/weather/Drizzle.png';
-      case 'Mist' || 'Haze' || 'Fog' || 'Smoke':
+      case 'Mist':
+      case 'Haze':
+      case 'Fog':
+      case 'Smoke':
         return 'img/weather/Mist.png';
-      case 'Dust' || 'Ash' || 'Sand':
+      case 'Dust':
+      case 'Ash':
+      case 'Sand':
         return 'img/weather/Dust.png';
       case 'Squall':
         return 'img/weather/Squall.png';
@@ -57,14 +62,24 @@ export const weatherInfo = {
   weatherBackgroundJudge(weather: string | undefined) {
     if (weather === undefined) return;
     switch (weather) {
-      case 'Clouds' || 'Rain' || 'Thunderstorm' || 'Tornado' || 'Squall' || 'Snow':
-        return '#646C78';
+      case 'Clouds':
+      case 'Rain':
+      case 'Thunderstorm':
+      case 'Snow':
+      case 'Tornado':
+      case 'Squall':
+        return '#CBCDD0';
       case 'Clear':
         return '#fff7b1';
-      case 'Dust' || 'Ash' || 'Sand':
+      case 'Dust':
+      case 'Ash':
+      case 'Sand':
         return '#B9A894';
-      case 'Mist' || 'Haze' || 'Fog' || 'Smoke':
-        return '#9D9DA3';
+      case 'Fog':
+      case 'Mist':
+      case 'Haze':
+      case 'Smoke':
+        return '#CBCDD0';
       default:
         return '#fff7b1';
     }

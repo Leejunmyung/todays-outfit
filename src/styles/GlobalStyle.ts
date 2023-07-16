@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background: #EDF5FB;
-    font-family: 'Gothic A1', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
   }
 
   li {
