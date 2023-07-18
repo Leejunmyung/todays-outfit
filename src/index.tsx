@@ -6,6 +6,7 @@ import GlobalStyle from './styles/GlobalStyle';
 import { RecoilRoot } from 'recoil';
 import ReactQueryWrapper from './queryClient/ReactQueryWrapper';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -22,3 +23,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+serviceWorkerRegistration.register();

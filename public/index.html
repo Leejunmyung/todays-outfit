@@ -29,6 +29,13 @@
     <title>Today's OutFit</title>
   </head>
   <body>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
