@@ -15,8 +15,8 @@ module.exports = async (req, res) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          'X-Naver-Client-Id': 'YOUR_NAVER_CLIENT_ID',
-          'X-Naver-Client-Secret': 'YOUR_NAVER_CLIENT_SECRET',
+          'X-Naver-Client-Id': process.env.REACT_APP_NAVER_CLIENT_ID,
+          'X-Naver-Client-Secret': process.env.REACT_APP_NAVER_CLIENT_SECRET,
         },
       },
     );
