@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { currentDate, airPollutionLevel, weatherImage, weatherBackground, getClothesInfo } from '../../recoil/selector';
 import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
-import ScrollVelocity from '../../components/ScrollVelocity';
+import CarouselScroll from '../../components/CarouselScroll';
+import Translate from '../../components/Translate';
 interface HomePresenterProps {
   getCurrentWeather: () => void;
 }
@@ -24,12 +25,14 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
             <TopDetailWrapper>
               <Date>{date}</Date>
               <AreaWrapper>
-                <Area>{weathers?.name}</Area>
+                <Area>
+                  <Translate text={weathers?.name} />
+                </Area>
               </AreaWrapper>
             </TopDetailWrapper>
             <MiddleDetailWrapper>
               <Temperature>{weathers?.main.temp}℃</Temperature>
-              <Weather>{weathers?.weather[0].description}</Weather>
+              <WeatherDesc>{weathers?.weather[0].description}</WeatherDesc>
             </MiddleDetailWrapper>
             <BottomDetailWrapper>
               <AdditionalInfoPack>
@@ -71,9 +74,9 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
           </WeatherIconWrapper>
         </WeatherCardWrapper>
         <ClothesCardWrapper>
-          <ClothesTitle>Today&apos;s outfit</ClothesTitle>
+          <ClothesTitle>Today&apos;s Outfit</ClothesTitle>
           <ScrollWrapper>
-            <ScrollVelocity baseVelocity={-10}>
+            <CarouselScroll baseVelocity={-5}>
               <ClothesBox>
                 {clothes?.map((c, i) => {
                   return (
@@ -84,7 +87,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
                   );
                 })}
               </ClothesBox>
-            </ScrollVelocity>
+            </CarouselScroll>
           </ScrollWrapper>
         </ClothesCardWrapper>
       </Container>
@@ -106,34 +109,38 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
   position: relative;
   min-width: 330px;
   max-width: 726px;
-  width: 80vw;
-  height: 50vw;
-  background: ${(props) =>
+  width: 83vw;
+  background: #f6fff8;
+  /* ${(props) =>
     `radial-gradient(178.94% 106.41% at 75.42% 106.41%, ${
       props.background ? props.background : '#fff7b1'
-    } 0%, rgba(255, 255, 255, 0) 71.88%), #ffffff`};
+    } 0%, rgba(255, 255, 255, 0) 71.88%), #ffffff`}; */
   border-radius: 20px;
-  box-shadow: 5px 9px 29px rgba(0, 0, 0, 0.22);
+  border: 4px solid #007ea7;
+  box-shadow: 4px 4px #007ea7;
   padding: 20px;
   display: flex;
-  transition: all 0.3s;
+  /* transition: all 0.3s;
   &:active {
     transform: scale(0.95) rotateZ(1.7deg);
-  }
+  } */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  color: #723d46;
 `;
 
 const ClothesCardWrapper = styled.div`
   margin-top: 30px;
   min-width: 330px;
   max-width: 726px;
-  width: 80vw;
+  width: 83vw;
   height: auto;
-  background: #00ffa0;
+  background: #f9f7f3;
   border-radius: 20px;
-  box-shadow: 4px 4px #05060f;
+  box-shadow: 4px 4px #8e7dbe;
   /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
   padding: 20px;
-  border: 4px solid #05060f;
+  border: 4px solid #8e7dbe;
   /* flex-wrap: wrap; */
 `;
 
@@ -142,7 +149,8 @@ const ScrollWrapper = styled.div`
 `;
 
 const ClothesBox = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
   display: flex;
   gap: 10px;
 `;
@@ -152,19 +160,22 @@ const ClothesPack = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #664eff;
+  border: 2px solid #d88c9a;
   border-radius: 10px;
   padding: 10px;
   gap: 15px;
 `;
 
 const ClothesTitle = styled.div`
-  color: #05060f;
+  font-family: 'Plaster', cursive;
+  text-align: center;
+  color: #d88c9a;
   font-size: 6vw;
   font-weight: 600;
 `;
 
 const ClothesName = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
   color: #05060f;
   font-size: 4.5vw;
   font-weight: 600;
@@ -189,7 +200,7 @@ const WeatherIconWrapper = styled.div`
 `;
 
 const WeatherIcon = styled.img`
-  width: 21vw;
+  width: 20vw;
 `;
 
 const LocationIcon = styled.img`
@@ -198,6 +209,11 @@ const LocationIcon = styled.img`
   top: 10px;
   width: 8vw;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 const Date = styled.div`
@@ -238,7 +254,7 @@ const AdditionalInfo = styled.div`
   display: flex;
 `;
 
-const Area = styled.p`
+const Area = styled.div`
   font-size: 6vw;
 `;
 
@@ -247,10 +263,10 @@ const Temperature = styled.p`
   font-weight: 500;
 `;
 
-const Weather = styled.p`
+const WeatherDesc = styled.p`
+  padding-top: 2vw;
   font-size: 4vw;
   font-weight: 600;
-  line-height: 11vw;
 `;
 
 const Desc = styled.p`

@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomePresenter from './HomePresenter';
 import { useGetPollution, useGetWeather } from '../../apiClient/Queries';
 import { useGeoLocation } from '../../utils/hooks/useGeoLocation';
 import { weatherData, airPollutionData } from '../../recoil/atom';
 import { useRecoilState } from 'recoil';
+import Loading from '../../components/Loading';
+import SplashScreen from '../../components/SplashScreen';
 
 const HomeContainer = () => {
+  const [splashing, setSplashing] = useState(true);
   const [, setWeathersData] = useRecoilState(weatherData);
   const [, setAirPollutionData] = useRecoilState(airPollutionData);
   const geolocationOptions = {
@@ -26,8 +29,15 @@ const HomeContainer = () => {
       setAirPollutionData(airPollution);
     }
   }, [weather, airPollution, getCurrentWeather]);
-  if (weatherLoading && airLoading) {
-    return <div>로딩중..</div>;
+  useEffect(() => {
+    setTimeout(() => {
+      setSplashing(false);
+    }, 2000);
+  }, []);
+  if ((weatherLoading || airLoading) && !splashing) {
+    return <Loading />;
+  } else if (splashing) {
+    return <SplashScreen />;
   }
 
   return <HomePresenter getCurrentWeather={getCurrentWeather} />;
