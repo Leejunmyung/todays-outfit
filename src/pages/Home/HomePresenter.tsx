@@ -118,7 +118,7 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
   border-radius: 20px;
   border: 4px solid #007ea7;
   box-shadow: 4px 4px #007ea7;
-  padding: 20px;
+  padding: 20px 15px;
   display: flex;
   /* transition: all 0.3s;
   &:active {
