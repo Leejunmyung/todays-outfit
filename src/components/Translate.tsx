@@ -12,7 +12,8 @@ const Translate = ({ text }: TranslateProps) => {
     const doTranslation = async () => {
       try {
         const { data } = await axios.post(
-          '/v1/papago/n2mt',
+          'https://todays-outfit.vercel.app/serverless/Translate',
+          // https://openapi.naver.com/v1/papago/n2mt
           // https://thingproxy.freeboard.io/fetch/
 
           {
