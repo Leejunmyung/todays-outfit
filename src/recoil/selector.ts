@@ -2,6 +2,7 @@ import { selector } from 'recoil';
 import { airPollutionData, weatherData } from './atom';
 import { convertDate } from '../utils/tools/convertDate';
 import { weatherInfo } from '../utils/tools/weatherInfo';
+import { clothesInfo } from '../utils/tools/clothesInfo';
 
 export const currentDate = selector({
   key: 'currentDate',
@@ -38,5 +39,15 @@ export const weatherBackground = selector({
     const allWeatherData = get(weatherData);
     const background = weatherInfo.weatherBackgroundJudge(allWeatherData?.weather[0].main);
     return background;
+  },
+});
+
+export const getClothesInfo = selector({
+  key: 'getClothesInfo',
+  get: ({ get }) => {
+    const allWeatherData = get(weatherData);
+    const tempt = allWeatherData?.main.temp;
+    const clothes = clothesInfo.getClothesType(tempt);
+    return clothes;
   },
 });
