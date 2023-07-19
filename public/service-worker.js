@@ -1,9 +1,15 @@
 // Make sure we're in the service worker
 if ('serviceWorker' in navigator) {
   // Use the window load event to keep the page load performant
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
+  window.addEventListener(
+    'load',
+    () => {
+      navigator.serviceWorker.register('/service-worker.js');
+    },
+    (err) => {
+      console.log(err);
+    },
+  );
 }
 
 // Set up Workbox
