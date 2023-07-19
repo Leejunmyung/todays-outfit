@@ -12,7 +12,7 @@ const Translate = ({ text }: TranslateProps) => {
     const doTranslation = async () => {
       try {
         const { data } = await axios.post(
-          'https://openapi.naver.com/v1/papago/n2mt',
+          '/v1/papago/n2mt',
           // https://thingproxy.freeboard.io/fetch/
 
           {

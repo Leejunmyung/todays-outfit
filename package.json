@@ -55,5 +55,6 @@
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.8",
     "workbox-cli": "^7.0.0"
-  }
+  },
+  "proxy": "https://openapi.naver.com"
 }
