@@ -118,12 +118,8 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
   border-radius: 20px;
   border: 4px solid #007ea7;
   box-shadow: 4px 4px #007ea7;
-  padding: 20px 15px;
+  padding: 6% 4%;
   display: flex;
-  /* transition: all 0.3s;
-  &:active {
-    transform: scale(0.95) rotateZ(1.7deg);
-  } */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
   color: #723d46;
@@ -136,7 +132,7 @@ const ClothesCardWrapper = styled.div`
   width: 83vw;
   height: auto;
   background: #f9f7f3;
-  border-radius: 20px;
+  border-radius: 6%;
   box-shadow: 4px 4px #8e7dbe;
   /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
   padding: 20px;
@@ -193,6 +189,8 @@ const WeatherDetailWrapper = styled.div`
 `;
 
 const WeatherIconWrapper = styled.div`
+  margin-top: 12%;
+  margin-bottom: 4%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,11 +206,15 @@ const LocationIcon = styled.img`
   right: 8px;
   top: 10px;
   width: 8vw;
+  border-radius: 40px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
   outline: none;
+  border: 2px solid #ea6a66;
+  box-shadow: 2px 2px #ea6a66;
+  transform: translate(-0.23em);
   &:active {
-    transform: scale(0.9);
+    transform: translate(0);
+    box-shadow: 0px 0px #ea6a66;
   }
 `;
 
