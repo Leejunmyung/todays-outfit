@@ -210,10 +210,10 @@ const LocationIcon = styled.img`
   cursor: pointer;
   outline: none;
   border: 2px solid #ea6a66;
-  box-shadow: 2px 2px #ea6a66;
-  transform: translate(-0.23em);
+  box-shadow: 0px 2px #ea6a66;
+  transform: translateY(-0.23em);
   &:active {
-    transform: translate(0);
+    transform: translateY(0);
     box-shadow: 0px 0px #ea6a66;
   }
 `;
