@@ -111,8 +111,7 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
   }
   position: relative;
   min-width: 330px;
-  max-width: 768px;
-  width: 86vw;
+  width: 87vw;
   background: #f6fff8;
   /* ${(props) =>
     `radial-gradient(178.94% 106.41% at 75.42% 106.41%, ${
@@ -134,8 +133,7 @@ const ClothesCardWrapper = styled.div`
   }
   margin-top: 30px;
   min-width: 330px;
-  max-width: 768px;
-  width: 86vw;
+  width: 87vw;
   height: auto;
   background: #f9f7f3;
   border-radius: 6%;
