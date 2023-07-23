@@ -106,10 +106,13 @@ const Container = styled.div`
 `;
 
 const WeatherCardWrapper = styled.div<{ background?: string }>`
+  @media (min-width: 768px) {
+    width: 420px;
+  }
   position: relative;
   min-width: 330px;
-  max-width: 726px;
-  width: 83vw;
+  max-width: 768px;
+  width: 85vw;
   background: #f6fff8;
   /* ${(props) =>
     `radial-gradient(178.94% 106.41% at 75.42% 106.41%, ${
@@ -118,7 +121,7 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
   border-radius: 20px;
   border: 4px solid #007ea7;
   box-shadow: 4px 4px #007ea7;
-  padding: 6% 4%;
+  padding: 25px 20px;
   display: flex;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
@@ -126,9 +129,12 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
 `;
 
 const ClothesCardWrapper = styled.div`
+  @media (min-width: 768px) {
+    width: 430px;
+  }
   margin-top: 30px;
   min-width: 330px;
-  max-width: 726px;
+  max-width: 768px;
   width: 83vw;
   height: auto;
   background: #f9f7f3;
@@ -163,6 +169,9 @@ const ClothesPack = styled.div`
 `;
 
 const ClothesTitle = styled.div`
+  @media (min-width: 768px) {
+    font-size: 26px;
+  }
   font-family: 'Plaster', cursive;
   text-align: center;
   color: #d88c9a;
@@ -171,6 +180,9 @@ const ClothesTitle = styled.div`
 `;
 
 const ClothesName = styled.div`
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
   font-family: 'Noto Sans KR', sans-serif;
   color: #05060f;
   font-size: 4.5vw;
@@ -178,10 +190,16 @@ const ClothesName = styled.div`
 `;
 
 const ClothesIcon = styled.img`
+  @media (min-width: 768px) {
+    width: 90px;
+  }
   width: 21vw;
 `;
 
 const WeatherDetailWrapper = styled.div`
+  @media (min-width: 768px) {
+    gap: 13px;
+  }
   display: flex;
   flex-direction: column;
   gap: 3vw;
@@ -198,10 +216,16 @@ const WeatherIconWrapper = styled.div`
 `;
 
 const WeatherIcon = styled.img`
+  @media (min-width: 768px) {
+    width: 86px;
+  }
   width: 20vw;
 `;
 
 const LocationIcon = styled.img`
+  @media (min-width: 768px) {
+    width: 34px;
+  }
   position: absolute;
   right: 8px;
   top: 10px;
@@ -219,6 +243,9 @@ const LocationIcon = styled.img`
 `;
 
 const Date = styled.div`
+  @media (min-width: 768px) {
+    font-size: 13px;
+  }
   color: #696666;
   font-size: 3vw;
   font-weight: 600;
@@ -257,26 +284,43 @@ const AdditionalInfo = styled.div`
 `;
 
 const Area = styled.div`
+  @media (min-width: 768px) {
+    font-size: 26px;
+  }
   font-size: 6vw;
 `;
 
 const Temperature = styled.p`
+  @media (min-width: 768px) {
+    font-size: 34px;
+  }
   font-size: 8vw;
   font-weight: 500;
 `;
 
 const WeatherDesc = styled.p`
+  @media (min-width: 768px) {
+    padding: 8.6px;
+    font-size: 17px;
+  }
   padding-top: 2vw;
   font-size: 4vw;
   font-weight: 600;
 `;
 
 const Desc = styled.p`
+  @media (min-width: 768px) {
+    font-size: 13px;
+  }
   font-size: 3.2vw;
   color: #696666;
 `;
 
 const Info = styled.p<{ color?: string }>`
+  @media (min-width: 768px) {
+    font-size: 13px;
+    line-height: 17px;
+  }
   font-size: 3vw;
   line-height: calc(3.5vw + 2px);
   color: ${(props) => props.color};
