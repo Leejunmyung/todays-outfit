@@ -102,7 +102,7 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
+  padding: 30px 18px;
 `;
 
 const WeatherCardWrapper = styled.div<{ background?: string }>`
