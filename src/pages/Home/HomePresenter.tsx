@@ -107,12 +107,12 @@ const Container = styled.div`
 
 const WeatherCardWrapper = styled.div<{ background?: string }>`
   @media (min-width: 768px) {
-    width: 420px;
+    width: 400px;
   }
   position: relative;
   min-width: 330px;
   max-width: 768px;
-  width: 85vw;
+  width: 86vw;
   background: #f6fff8;
   /* ${(props) =>
     `radial-gradient(178.94% 106.41% at 75.42% 106.41%, ${
@@ -130,12 +130,12 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
 
 const ClothesCardWrapper = styled.div`
   @media (min-width: 768px) {
-    width: 430px;
+    width: 400px;
   }
   margin-top: 30px;
   min-width: 330px;
   max-width: 768px;
-  width: 83vw;
+  width: 86vw;
   height: auto;
   background: #f9f7f3;
   border-radius: 6%;
