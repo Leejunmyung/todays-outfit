@@ -200,7 +200,7 @@ const WeatherDetailWrapper = styled.div`
   }
   display: flex;
   flex-direction: column;
-  gap: 3vw;
+  gap: 1vw;
   width: 70%;
 `;
 
@@ -263,6 +263,7 @@ const MiddleDetailWrapper = styled.div`
   padding: 0px 5px;
   display: flex;
   gap: 15px;
+  margin-bottom: 10px;
 `;
 
 const BottomDetailWrapper = styled.div`
@@ -285,6 +286,7 @@ const Area = styled.div`
   @media (min-width: 768px) {
     font-size: 26px;
   }
+  font-weight: 500;
   font-size: 6vw;
 `;
 
