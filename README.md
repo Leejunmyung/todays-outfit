@@ -1,7 +1,6 @@
 # Today's OutFit(오늘의 옷차림)
 
-![Frame 1](https://github.com/Leejunmyung/image/assets/61734933/e56f420a-14e1-42a9-9274-0a383f56e1c6)
-
+![To-Icon](https://github.com/Leejunmyung/Todays_OutFit/assets/61734933/c3020321-8a9e-4314-806e-476298d44561)
 
 openAPI를 이용해 날씨정보를 불러오고 날씨에 적합한 옷차림을 알려주는 사이트
 
