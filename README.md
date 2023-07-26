@@ -6,16 +6,20 @@ openAPI를 이용해 날씨정보를 불러오고 날씨에 적합한 옷차림�
 
 - [\[Today's OutFit 바로가기\]](https://todays-outfit.vercel.app/)
 
-### 스택
+## 스택
 
 - React, React-Query, Recoil
 
-### 패키지
+## 패키지
 
 - axios, styled-components, framer-motion
 
-### openApi
+## openApi
 
 - https://openweathermap.org/
 
 - https://papago.naver.com/
+
+## 배포
+
+- vercel
