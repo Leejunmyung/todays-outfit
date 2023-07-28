@@ -1,20 +1,17 @@
 import { QueryKey, useQuery } from '@tanstack/react-query';
 import { getCurrentPollution, getCurrentWeather } from './Api';
 import { WeatherData, AirPollutionData } from './type';
-import { useRecoilValue } from 'recoil';
-import { currentLocation } from '../recoil/atom';
+import { LocationParams } from './type';
 
-export const useGetWeather = () => {
-  const weatherParams = useRecoilValue(currentLocation);
+export const useGetWeather = (locationParams: LocationParams) => {
   return useQuery<WeatherData, QueryKey>(['weather'], () => {
-    return getCurrentWeather(weatherParams);
+    return getCurrentWeather(locationParams);
   });
 };
 
-export const useGetPollution = () => {
-  const pollutionParams = useRecoilValue(currentLocation);
+export const useGetPollution = (locationParams: LocationParams) => {
   return useQuery<AirPollutionData, QueryKey>(['pollution'], () => {
-    return getCurrentPollution(pollutionParams);
+    return getCurrentPollution(locationParams);
   });
 };
 
