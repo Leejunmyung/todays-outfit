@@ -6,7 +6,7 @@ interface TranslateProps {
 }
 
 const Translate = ({ text }: TranslateProps) => {
-  const [translatedText, setTranslatedText] = useState('');
+  const [translatedText, setTranslatedText] = useState('위치');
 
   useEffect(() => {
     const doTranslation = async () => {
