@@ -10,3 +10,8 @@ export const airPollutionData = atom<AirPollutionData | null>({
   key: 'airPollutionData',
   default: null,
 });
+
+export const weeklyWeatherData = atom<WeeklyWeatherData | null>({
+  key: 'weeklyWeatherData',
+  default: null,
+});
