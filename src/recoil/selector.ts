@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { airPollutionData, weatherData } from './atom';
+import { airPollutionData, weatherData, weeklyWeatherData } from './atom';
 import { convertDate } from '../utils/tools/convertDate';
 import { weatherInfo } from '../utils/tools/weatherInfo';
 import { clothesInfo } from '../utils/tools/clothesInfo';
@@ -11,6 +11,41 @@ export const currentDate = selector({
     const date = convertDate.formatDate(weather?.dt);
     const sunSet = convertDate.formatDate(weather?.sys.sunset)?.slice(-5);
     return { date, sunSet };
+  },
+});
+
+export const hourlyWeather = selector({
+  key: 'hourlyWeather',
+  get: ({ get }) => {
+    const weeklyWeather = get(weeklyWeatherData);
+    const hourWeather = weeklyWeather?.hourly.slice(0, 9).map((h) => {
+      const hourObj = {
+        hour: convertDate.outputHour(h.dt),
+        temp: h.temp,
+        weather: weatherInfo.weatherImageJudge(h.weather[0]?.main),
+      };
+      return hourObj;
+    });
+    return hourWeather;
+  },
+});
+
+export const weeklyWeather = selector({
+  key: 'weeklyWeather',
+  get: ({ get }) => {
+    const weeklyWeather = get(weeklyWeatherData);
+    const newWeeklyWeather = weeklyWeather?.daily.map((d) => {
+      const weekObj = {
+        date: convertDate.outputSimpleDate(d.dt),
+        temp: {
+          morning: d.temp.morn,
+          evening: d.temp.eve,
+        },
+        weather: weatherInfo.weatherImageJudge(d.weather[0]?.main),
+      };
+      return weekObj;
+    });
+    return newWeeklyWeather;
   },
 });
 

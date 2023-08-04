@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { AirPollutionData, WeatherData } from '../apiClient/type';
+import { WeeklyWeatherData, AirPollutionData, WeatherData } from '../apiClient/type';
 
 export const weatherData = atom<WeatherData | null>({
   key: 'weatherData',
