@@ -1,6 +1,6 @@
 import { QueryKey, useQuery } from '@tanstack/react-query';
-import { getCurrentPollution, getCurrentWeather } from './Api';
-import { WeatherData, AirPollutionData } from './type';
+import { getCurrentPollution, getCurrentWeather, getWeeklyWeather } from './Api';
+import { WeeklyWeatherData, WeatherData, AirPollutionData } from './type';
 import { LocationParams } from './type';
 
 export const useGetWeather = (locationParams: LocationParams) => {
@@ -12,6 +12,12 @@ export const useGetWeather = (locationParams: LocationParams) => {
 export const useGetPollution = (locationParams: LocationParams) => {
   return useQuery<AirPollutionData, QueryKey>(['pollution'], () => {
     return getCurrentPollution(locationParams);
+  });
+};
+
+export const useGetWeeklyWeather = (locationParams: LocationParams) => {
+  return useQuery<WeeklyWeatherData, QueryKey>(['weeklyWeather'], () => {
+    return getWeeklyWeather(locationParams);
   });
 };
 
