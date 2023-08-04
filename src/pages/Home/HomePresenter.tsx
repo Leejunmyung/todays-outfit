@@ -43,7 +43,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
                 </AreaWrapper>
               </TopDetailWrapper>
               <MiddleDetailWrapper>
-                <Temperature>{weathers?.main.temp}℃</Temperature>
+                <Temperature>{weathers?.main.temp.toFixed(1)}℃</Temperature>
                 <WeatherDesc>{weathers?.weather[0].description}</WeatherDesc>
               </MiddleDetailWrapper>
               <BottomDetailWrapper>
@@ -60,7 +60,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
                 <AdditionalInfoPack>
                   <AdditionalInfo>
                     <Desc>체감</Desc>
-                    <Info>{weathers?.main.feels_like}º</Info>
+                    <Info>{weathers?.main.feels_like.toFixed(1)}º</Info>
                   </AdditionalInfo>
                   <AdditionalInfo>
                     <Desc>초미세</Desc>
@@ -98,7 +98,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
           </WeatherHourlyWrapper>
         </WeatherCardWrapper>
         <WeeklyWeatherCardWrapper>
-          <WeeklyTitle>주간 예보</WeeklyTitle>
+          <WeeklyTitle>Weekly Forecast</WeeklyTitle>
           <WeatherWeeklyContentsWrapper>
             {weeklyWeathers?.map((w, i) => {
               return (
@@ -173,7 +173,7 @@ const ClothesCardWrapper = styled.div`
   @media (min-width: 768px) {
     width: 400px;
   }
-  margin-top: 30px;
+  margin-top: 20px;
   min-width: 330px;
   width: 88vw;
   height: auto;
@@ -194,22 +194,23 @@ const WeeklyWeatherCardWrapper = styled.div`
   @media (min-width: 768px) {
     width: 400px;
   }
-  margin-top: 30px;
+  margin-top: 20px;
   min-width: 330px;
   width: 88vw;
   height: auto;
-  background: #fef9ef;
+  background: #f4f4f6;
   border-radius: 6%;
-  box-shadow: 4px 4px #83c5be;
+  box-shadow: 4px 4px #f4d1ae;
   /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
   padding: 15px 15px;
-  border: 4px solid #83c5be;
+  border: 4px solid #f4d1ae;
+  text-align: center;
   /* flex-wrap: wrap; */
 `;
 
 const WeatherWeeklyContentsWrapper = styled.div`
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
 `;
 
 const WeatherWeeklyDetailWrapper = styled.div`
@@ -221,6 +222,9 @@ const WeatherWeeklyDetailWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 3vw;
+  border: 2px solid #3333;
+  border-radius: 10px;
+  padding: 10px;
   margin-right: 20px;
 `;
 
@@ -232,13 +236,14 @@ const WeeklyTitle = styled.div`
   color: #4e8098;
   font-size: 5vw;
   font-weight: 600;
+  font-family: 'Plaster', cursive;
 `;
 
 const SimpleDate = styled.div`
   @media (min-width: 768px) {
     font-size: 12px;
   }
-  text-wrap: nowrap;
+  white-space: nowrap;
   color: #696666;
   font-size: 3vw;
   font-weight: 600;
@@ -289,7 +294,7 @@ const WeatherHourlyWrapper = styled.div`
   }
   margin-top: 20px;
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
   gap: 4vw;
 `;
 
@@ -356,7 +361,7 @@ const ClothesTitle = styled.div`
   font-family: 'Plaster', cursive;
   text-align: center;
   color: #d88c9a;
-  font-size: 6vw;
+  font-size: 5vw;
   font-weight: 600;
 `;
 
