@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { currentDate, airPollutionLevel, weatherImage, weatherBackground, getClothesInfo } from '../../recoil/selector';
+import {
+  currentDate,
+  hourlyWeather,
+  weeklyWeather,
+  airPollutionLevel,
+  weatherImage,
+  weatherBackground,
+  getClothesInfo,
+} from '../../recoil/selector';
 import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
 import CarouselScroll from '../../components/CarouselScroll';
@@ -14,65 +22,100 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
   const { fineDust, ulFineDust } = useRecoilValue(airPollutionLevel);
   const weatherImg = useRecoilValue(weatherImage);
   const weatherBg = useRecoilValue(weatherBackground);
+  const hourlyWeathers = useRecoilValue(hourlyWeather);
+  const weeklyWeathers = useRecoilValue(weeklyWeather);
   const weathers = useRecoilValue(weatherData);
   const clothes = useRecoilValue(getClothesInfo);
+  console.log(weeklyWeathers);
   return (
     <>
       <Container>
         <WeatherCardWrapper background={weatherBg}>
           <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon5.png" />
-          <WeatherDetailWrapper>
-            <TopDetailWrapper>
-              <Date>{date}</Date>
-              <AreaWrapper>
-                <Area>
-                  <Translate text={weathers?.name} />
-                </Area>
-              </AreaWrapper>
-            </TopDetailWrapper>
-            <MiddleDetailWrapper>
-              <Temperature>{weathers?.main.temp}℃</Temperature>
-              <WeatherDesc>{weathers?.weather[0].description}</WeatherDesc>
-            </MiddleDetailWrapper>
-            <BottomDetailWrapper>
-              <AdditionalInfoPack>
-                <AdditionalInfo>
-                  <Desc>습도</Desc>
-                  <Info>{weathers?.main.humidity}%</Info>
-                </AdditionalInfo>
-                <AdditionalInfo>
-                  <Desc>미세</Desc>
-                  <Info color={fineDust === '좋음' || fineDust === '보통' ? '#3f62e8' : '#e83f3f'}>{fineDust}</Info>
-                </AdditionalInfo>
-              </AdditionalInfoPack>
-              <AdditionalInfoPack>
-                <AdditionalInfo>
-                  <Desc>체감</Desc>
-                  <Info>{weathers?.main.feels_like}º</Info>
-                </AdditionalInfo>
-                <AdditionalInfo>
-                  <Desc>초미세</Desc>
-                  <Info color={ulFineDust === '좋음' || ulFineDust === '보통' ? '#3f62e8' : '#e83f3f'}>
-                    {ulFineDust}
-                  </Info>
-                </AdditionalInfo>
-              </AdditionalInfoPack>
-              <AdditionalInfoPack>
-                <AdditionalInfo>
-                  <Desc>서풍</Desc>
-                  <Info>{weathers?.wind.speed}m/s</Info>
-                </AdditionalInfo>
-                <AdditionalInfo>
-                  <Desc>일몰</Desc>
-                  <Info>{sunSet}</Info>
-                </AdditionalInfo>
-              </AdditionalInfoPack>
-            </BottomDetailWrapper>
-          </WeatherDetailWrapper>
-          <WeatherIconWrapper>
-            <WeatherIcon loading="lazy" src={weatherImg} />
-          </WeatherIconWrapper>
+          <WeatherCurrentWrapper>
+            <WeatherDetailWrapper>
+              <TopDetailWrapper>
+                <Date>{date}</Date>
+                <AreaWrapper>
+                  <Area>
+                    <Translate text={weathers?.name} />
+                  </Area>
+                </AreaWrapper>
+              </TopDetailWrapper>
+              <MiddleDetailWrapper>
+                <Temperature>{weathers?.main.temp}℃</Temperature>
+                <WeatherDesc>{weathers?.weather[0].description}</WeatherDesc>
+              </MiddleDetailWrapper>
+              <BottomDetailWrapper>
+                <AdditionalInfoPack>
+                  <AdditionalInfo>
+                    <Desc>습도</Desc>
+                    <Info>{weathers?.main.humidity}%</Info>
+                  </AdditionalInfo>
+                  <AdditionalInfo>
+                    <Desc>미세</Desc>
+                    <Info color={fineDust === '좋음' || fineDust === '보통' ? '#3f62e8' : '#e83f3f'}>{fineDust}</Info>
+                  </AdditionalInfo>
+                </AdditionalInfoPack>
+                <AdditionalInfoPack>
+                  <AdditionalInfo>
+                    <Desc>체감</Desc>
+                    <Info>{weathers?.main.feels_like}º</Info>
+                  </AdditionalInfo>
+                  <AdditionalInfo>
+                    <Desc>초미세</Desc>
+                    <Info color={ulFineDust === '좋음' || ulFineDust === '보통' ? '#3f62e8' : '#e83f3f'}>
+                      {ulFineDust}
+                    </Info>
+                  </AdditionalInfo>
+                </AdditionalInfoPack>
+                <AdditionalInfoPack>
+                  <AdditionalInfo>
+                    <Desc>서풍</Desc>
+                    <Info>{weathers?.wind.speed}m/s</Info>
+                  </AdditionalInfo>
+                  <AdditionalInfo>
+                    <Desc>일몰</Desc>
+                    <Info>{sunSet}</Info>
+                  </AdditionalInfo>
+                </AdditionalInfoPack>
+              </BottomDetailWrapper>
+            </WeatherDetailWrapper>
+            <WeatherIconWrapper>
+              <WeatherIcon loading="lazy" src={weatherImg} />
+            </WeatherIconWrapper>
+          </WeatherCurrentWrapper>
+          <WeatherHourlyWrapper>
+            {hourlyWeathers?.map((h, i) => {
+              return (
+                <WeatherHourlyDetailWrapper key={i}>
+                  <Hour>{h.hour}시</Hour>
+                  <HourlyWeatherIcon src={h.weather} />
+                  <HourlyTemperature>{h.temp.toFixed(0)}</HourlyTemperature>
+                </WeatherHourlyDetailWrapper>
+              );
+            })}
+          </WeatherHourlyWrapper>
         </WeatherCardWrapper>
+        <WeeklyWeatherCardWrapper>
+          <WeeklyTitle>주간 예보</WeeklyTitle>
+          <WeatherWeeklyContentsWrapper>
+            {weeklyWeathers?.map((w, i) => {
+              return (
+                <WeatherWeeklyDetailWrapper key={i}>
+                  {/* <Day>{w.date?.day}</Day> */}
+                  <SimpleDate>{w.date?.simpleDate + '/' + w.date?.day}</SimpleDate>
+                  <WeeklyWeatherIcon src={w.weather} />
+                  <TemperatureWrapper>
+                    <WeeklyMorningTemperature>{w.temp.morning}º</WeeklyMorningTemperature>
+                    <DividingLine />
+                    <WeeklyEveningTemperature>{w.temp.evening}º</WeeklyEveningTemperature>
+                  </TemperatureWrapper>
+                </WeatherWeeklyDetailWrapper>
+              );
+            })}
+          </WeatherWeeklyContentsWrapper>
+        </WeeklyWeatherCardWrapper>
         <ClothesCardWrapper>
           <ClothesTitle>Today&apos;s Outfit</ClothesTitle>
           <ScrollWrapper>
@@ -121,7 +164,6 @@ const WeatherCardWrapper = styled.div<{ background?: string }>`
   border: 4px solid #007ea7;
   box-shadow: 4px 4px #007ea7;
   padding: 25px 20px;
-  display: flex;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
   color: #723d46;
@@ -142,6 +184,147 @@ const ClothesCardWrapper = styled.div`
   padding: 20px;
   border: 4px solid #8e7dbe;
   /* flex-wrap: wrap; */
+`;
+
+const WeatherCurrentWrapper = styled.div`
+  display: flex;
+`;
+
+const WeeklyWeatherCardWrapper = styled.div`
+  @media (min-width: 768px) {
+    width: 400px;
+  }
+  margin-top: 30px;
+  min-width: 330px;
+  width: 88vw;
+  height: auto;
+  background: #fef9ef;
+  border-radius: 6%;
+  box-shadow: 4px 4px #83c5be;
+  /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
+  padding: 15px 15px;
+  border: 4px solid #83c5be;
+  /* flex-wrap: wrap; */
+`;
+
+const WeatherWeeklyContentsWrapper = styled.div`
+  display: flex;
+  overflow: scroll;
+`;
+
+const WeatherWeeklyDetailWrapper = styled.div`
+  @media (min-width: 768px) {
+    gap: 12px;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3vw;
+  margin-right: 20px;
+`;
+
+const WeeklyTitle = styled.div`
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
+  margin-bottom: 20px;
+  color: #4e8098;
+  font-size: 5vw;
+  font-weight: 600;
+`;
+
+const SimpleDate = styled.div`
+  @media (min-width: 768px) {
+    font-size: 12px;
+  }
+  text-wrap: nowrap;
+  color: #696666;
+  font-size: 3vw;
+  font-weight: 600;
+`;
+
+const WeeklyWeatherIcon = styled.img`
+  @media (min-width: 768px) {
+    width: 56px;
+  }
+  width: 10vw;
+`;
+
+const TemperatureWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+`;
+
+const WeeklyMorningTemperature = styled.div`
+  @media (min-width: 768px) {
+    font-size: 8px;
+  }
+  color: blue;
+  font-size: 2vw;
+  font-weight: 600;
+`;
+
+const DividingLine = styled.hr`
+  border: none;
+  border-left: 1px solid hsla(200, 10%, 50%, 100);
+  height: 12px;
+  width: 1px;
+`;
+
+const WeeklyEveningTemperature = styled.div`
+  @media (min-width: 768px) {
+    font-size: 8px;
+  }
+  color: red;
+  font-size: 2vw;
+  font-weight: 600;
+`;
+
+const WeatherHourlyWrapper = styled.div`
+  @media (min-width: 768px) {
+    gap: 13px;
+  }
+  margin-top: 20px;
+  display: flex;
+  overflow: scroll;
+  gap: 4vw;
+`;
+
+const WeatherHourlyDetailWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3px;
+`;
+
+const Hour = styled.div`
+  @media (min-width: 768px) {
+    font-size: 13px;
+  }
+  text-wrap: nowrap;
+  color: #696666;
+  font-size: 3vw;
+  font-weight: 600;
+`;
+
+const HourlyWeatherIcon = styled.img`
+  @media (min-width: 768px) {
+    width: 36px;
+  }
+  width: 5vw;
+`;
+
+const HourlyTemperature = styled.div`
+  @media (min-width: 768px) {
+    font-size: 13px;
+  }
+  color: #05060f;
+  font-size: 3vw;
+  font-weight: 600;
 `;
 
 const ScrollWrapper = styled.div`
