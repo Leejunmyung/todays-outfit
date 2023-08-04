@@ -11,7 +11,7 @@ export const queryClient = new QueryClient({
       retry: 2,
       retryDelay: 1000,
       // enabled: false,
-      staleTime: 6000000,
+      staleTime: 3600000,
       onError: (error: any) => {
         console.log(error);
       },
