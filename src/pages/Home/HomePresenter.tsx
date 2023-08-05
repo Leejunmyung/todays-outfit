@@ -107,9 +107,9 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
                   <SimpleDate>{w.date?.simpleDate + '/' + w.date?.day}</SimpleDate>
                   <WeeklyWeatherIcon src={w.weather} />
                   <TemperatureWrapper>
-                    <WeeklyMorningTemperature>{w.temp.morning}º</WeeklyMorningTemperature>
+                    <WeeklyMorningTemperature>{w.temp.morning.toFixed(0)}º</WeeklyMorningTemperature>
                     <DividingLine />
-                    <WeeklyEveningTemperature>{w.temp.evening}º</WeeklyEveningTemperature>
+                    <WeeklyEveningTemperature>{w.temp.evening.toFixed(0)}º</WeeklyEveningTemperature>
                   </TemperatureWrapper>
                 </WeatherWeeklyDetailWrapper>
               );
@@ -145,7 +145,7 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 30px 18px;
+  padding: 20px 18px;
 `;
 
 const WeatherCardWrapper = styled.div<{ background?: string }>`
@@ -222,9 +222,9 @@ const WeatherWeeklyDetailWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 3vw;
-  border: 2px solid #3333;
+  border: 2px solid lightgray;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 15px;
   margin-right: 20px;
 `;
 
@@ -257,10 +257,13 @@ const WeeklyWeatherIcon = styled.img`
 `;
 
 const TemperatureWrapper = styled.div`
+  @media (min-width: 768px) {
+    gap: 4px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3px;
+  gap: 1vw;
 `;
 
 const WeeklyMorningTemperature = styled.div`
@@ -310,7 +313,7 @@ const Hour = styled.div`
   @media (min-width: 768px) {
     font-size: 13px;
   }
-  text-wrap: nowrap;
+  white-space: nowrap;
   color: #696666;
   font-size: 3vw;
   font-weight: 600;
@@ -318,7 +321,7 @@ const Hour = styled.div`
 
 const HourlyWeatherIcon = styled.img`
   @media (min-width: 768px) {
-    width: 36px;
+    width: 20px;
   }
   width: 5vw;
 `;
@@ -356,7 +359,7 @@ const ClothesPack = styled.div`
 
 const ClothesTitle = styled.div`
   @media (min-width: 768px) {
-    font-size: 26px;
+    font-size: 20px;
   }
   font-family: 'Plaster', cursive;
   text-align: center;
