@@ -13,6 +13,7 @@ import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
 import CarouselScroll from '../../components/CarouselScroll';
 import Translate from '../../components/Translate';
+import AdComponent from '../../components/AdComponent';
 interface HomePresenterProps {
   getCurrentWeather: () => void;
 }
@@ -26,9 +27,9 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
   const weeklyWeathers = useRecoilValue(weeklyWeather);
   const weathers = useRecoilValue(weatherData);
   const clothes = useRecoilValue(getClothesInfo);
-  console.log(weeklyWeathers);
   return (
     <>
+      <AdComponent />
       <Container>
         <WeatherCardWrapper background={weatherBg}>
           <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon5.png" />
