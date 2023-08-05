@@ -19,7 +19,7 @@ const AdComponent = () => {
       <ins
         className="kakao_ad_area"
         style={{ display: 'block' }}
-        data-ad-unit="DAN-LrB28eMymKCS009z"
+        data-ad-unit={process.env.REACT_APP_KAKAO_ADFIT}
         data-ad-width="320"
         data-ad-height="50"
       ></ins>
