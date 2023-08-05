@@ -34,6 +34,7 @@ const HomeContainer = () => {
     fetchLocation();
     weatherQuery.refetch();
     pollutionQuery.refetch();
+    weeklyWeatherQuery.refetch();
   };
 
   useEffect(() => {
