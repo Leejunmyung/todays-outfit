@@ -12,9 +12,10 @@ const instance = axios.create({
   },
 });
 
-module.exports = async (params) => {
+module.exports = async (req, res) => {
+  const { params } = req.body;
   try {
-    console.log(params);
+    console.log(params, req, res);
     const response = await instance.get(`/weather,`, { params });
 
     res.status(200).send(response.data);
