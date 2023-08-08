@@ -120,7 +120,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
         <ClothesCardWrapper>
           <ClothesTitle>Today&apos;s Outfit</ClothesTitle>
           <ScrollWrapper>
-            <CarouselScroll baseVelocity={-5}>
+            <CarouselScroll baseVelocity={-3}>
               <ClothesBox>
                 {clothes?.map((c, i) => {
                   return (
