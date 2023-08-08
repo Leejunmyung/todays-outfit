@@ -15,7 +15,7 @@ const instance = axios.create({
 module.exports = async (params) => {
   try {
     console.log(params);
-    const response = await instance.get(`'https://todays-outfit.vercel.app/api/weather',`, { params });
+    const response = await instance.get(`/weather,`, { params });
 
     res.status(200).send(response.data);
   } catch (error) {
