@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^5.2.2",
+    "@capacitor/cli": "^5.2.2",
+    "@capacitor/core": "^5.2.2",
+    "@capacitor/ios": "^5.2.2",
     "@motionone/utils": "^10.15.1",
     "@tanstack/react-query": "^4.29.13",
     "@tanstack/react-query-devtools": "^4.29.14",
