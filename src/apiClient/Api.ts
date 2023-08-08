@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { baseApi } from './Fetcher';
 import { LocationParams } from './type';
 
@@ -6,7 +7,8 @@ export const getCurrentWeather = async (locationParams: LocationParams) => {
     lat: locationParams.lat,
     lon: locationParams.lon,
   };
-  const result = await baseApi.get(`/weather`, { params });
+  const result = await axios.get('https://todays-outfit.vercel.app/api/translate', { params });
+  console.log(result);
   return result.data;
 };
 
