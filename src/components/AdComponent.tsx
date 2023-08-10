@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 
-const AdComponent = () => {
+interface AdComponentProps {
+  code: string | undefined;
+}
+
+const AdComponent = ({ code }: AdComponentProps) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -19,7 +23,7 @@ const AdComponent = () => {
       <ins
         className="kakao_ad_area"
         style={{ display: 'block' }}
-        data-ad-unit={process.env.REACT_APP_KAKAO_ADFIT}
+        data-ad-unit={code}
         data-ad-width="320"
         data-ad-height="50"
       ></ins>

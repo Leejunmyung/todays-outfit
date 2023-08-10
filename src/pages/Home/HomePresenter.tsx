@@ -29,7 +29,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
   const clothes = useRecoilValue(getClothesInfo);
   return (
     <>
-      <AdComponent />
+      <AdComponent code={process.env.REACT_APP_KAKAO_ADFIT_FIRST} />
       <Container>
         <WeatherCardWrapper background={weatherBg}>
           <LocationIcon onClick={getCurrentWeather} loading="lazy" src="img/etc/location-icon5.png" />
@@ -135,6 +135,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
           </ScrollWrapper>
         </ClothesCardWrapper>
       </Container>
+      <AdComponent code={process.env.REACT_APP_KAKAO_ADFIT_SECOND} />
     </>
   );
 };
