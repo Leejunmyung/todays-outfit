@@ -18,7 +18,7 @@ export const hourlyWeather = selector({
   key: 'hourlyWeather',
   get: ({ get }) => {
     const weeklyWeather = get(weeklyWeatherData);
-    const hourWeather = weeklyWeather?.hourly.slice(0, 9).map((h) => {
+    const hourWeather = weeklyWeather?.hourly.slice(0, 11).map((h) => {
       const hourObj = {
         hour: convertDate.outputHour(h.dt),
         temp: h.temp,
