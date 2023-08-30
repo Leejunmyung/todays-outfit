@@ -200,7 +200,7 @@ const WeeklyWeatherCardWrapper = styled.div`
   min-width: 330px;
   width: 88vw;
   height: auto;
-  background: #f9fcfe;
+  background: #fefcf9;
   border-radius: 6%;
   box-shadow: 4px 4px #f4d1ae;
   /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
