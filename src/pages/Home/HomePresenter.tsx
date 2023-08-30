@@ -105,7 +105,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
               return (
                 <WeatherWeeklyDetailWrapper key={i}>
                   {/* <Day>{w.date?.day}</Day> */}
-                  <SimpleDate>{w.date?.simpleDate + '/' + w.date?.day}</SimpleDate>
+                  <SimpleDate>{w.date?.simpleDate + '(' + w.date?.day + ')'}</SimpleDate>
                   <WeeklyWeatherIcon src={w.weather} />
                   <TemperatureWrapper>
                     <WeeklyMorningTemperature>{w.temp.morning.toFixed(0)}º</WeeklyMorningTemperature>
@@ -200,7 +200,7 @@ const WeeklyWeatherCardWrapper = styled.div`
   min-width: 330px;
   width: 88vw;
   height: auto;
-  background: #f4f4f6;
+  background: #f9fcfe;
   border-radius: 6%;
   box-shadow: 4px 4px #f4d1ae;
   /* 5px 9px 29px rgba(0, 0, 0, 0.22); */
