@@ -14,11 +14,13 @@ import { weatherData } from '../../recoil/atom';
 import CarouselScroll from '../../components/CarouselScroll';
 import Translate from '../../components/Translate';
 import AdComponent from '../../components/AdComponent';
+import Spinner from '../../components/Spinner';
 interface HomePresenterProps {
+  loading: boolean;
   getCurrentWeather: () => void;
 }
 
-const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
+const HomePresenter = ({ loading, getCurrentWeather }: HomePresenterProps) => {
   const { date, sunSet } = useRecoilValue(currentDate);
   const { fineDust, ulFineDust } = useRecoilValue(airPollutionLevel);
   const weatherImg = useRecoilValue(weatherImage);
@@ -38,9 +40,7 @@ const HomePresenter = ({ getCurrentWeather }: HomePresenterProps) => {
               <TopDetailWrapper>
                 <Date>{date}</Date>
                 <AreaWrapper>
-                  <Area>
-                    <Translate text={weathers?.name} />
-                  </Area>
+                  <Area>{loading ? <Spinner /> : <Translate text={weathers?.name} />}</Area>
                 </AreaWrapper>
               </TopDetailWrapper>
               <MiddleDetailWrapper>

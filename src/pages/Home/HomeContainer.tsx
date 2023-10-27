@@ -10,6 +10,7 @@ const DEFAULT_LOCATION = { lat: 37.566535, lon: 126.9779692 };
 
 const HomeContainer = () => {
   const [splashing, setSplashing] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [, setWeatherData] = useRecoilState(weatherData);
   const [, setAirPollutionData] = useRecoilState(airPollutionData);
   const [, setWeeklyWeatherData] = useRecoilState(weeklyWeatherData);
@@ -30,11 +31,13 @@ const HomeContainer = () => {
     );
   };
 
-  const getCurrentWeather = () => {
+  const getCurrentWeather = async () => {
+    setLoading(true);
     fetchLocation();
-    weatherQuery.refetch();
-    pollutionQuery.refetch();
-    weeklyWeatherQuery.refetch();
+    await weatherQuery.refetch();
+    await pollutionQuery.refetch();
+    await weeklyWeatherQuery.refetch();
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -60,7 +63,7 @@ const HomeContainer = () => {
     return <Loading />;
   }
 
-  return <HomePresenter getCurrentWeather={getCurrentWeather} />;
+  return <HomePresenter loading={loading} getCurrentWeather={getCurrentWeather} />;
 };
 
 export default HomeContainer;
