@@ -37,7 +37,9 @@ const HomeContainer = () => {
     await weatherQuery.refetch();
     await pollutionQuery.refetch();
     await weeklyWeatherQuery.refetch();
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {
