@@ -58,6 +58,7 @@ const HomeContainer = () => {
     await pollutionQuery.refetch();
     await weeklyWeatherQuery.refetch();
     doTranslation(weatherInfo ? weatherInfo.name : translatedText);
+    setLoading(false);
   };
 
   useEffect(() => {
