@@ -16,11 +16,12 @@ import Translate from '../../components/Translate';
 import AdComponent from '../../components/AdComponent';
 import Spinner from '../../components/Spinner';
 interface HomePresenterProps {
+  translatedText: string;
   loading: boolean;
   getCurrentWeather: () => void;
 }
 
-const HomePresenter = ({ loading, getCurrentWeather }: HomePresenterProps) => {
+const HomePresenter = ({ translatedText, loading, getCurrentWeather }: HomePresenterProps) => {
   const { date, sunSet } = useRecoilValue(currentDate);
   const { fineDust, ulFineDust } = useRecoilValue(airPollutionLevel);
   const weatherImg = useRecoilValue(weatherImage);
@@ -40,7 +41,7 @@ const HomePresenter = ({ loading, getCurrentWeather }: HomePresenterProps) => {
               <TopDetailWrapper>
                 <Date>{date}</Date>
                 <AreaWrapper>
-                  <Area>{loading ? <Spinner /> : <Translate text={weathers?.name} />}</Area>
+                  <Area>{loading ? <Spinner /> : translatedText}</Area>
                 </AreaWrapper>
               </TopDetailWrapper>
               <MiddleDetailWrapper>

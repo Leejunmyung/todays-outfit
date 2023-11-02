@@ -69,7 +69,7 @@ export const clothesInfo = {
         return [
           { name: '가디건', clothes: clothes.cardigan },
           { name: '트렌치코트', clothes: clothes.trench },
-          { name: '슬렉스', clothes: clothes.slacks },
+          { name: '슬랙스', clothes: clothes.slacks },
         ];
       case tempt > 5:
         return [

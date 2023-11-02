@@ -5,13 +5,15 @@ import { weatherData, airPollutionData, weeklyWeatherData } from '../../recoil/a
 import { useRecoilState } from 'recoil';
 import Loading from '../../components/Loading';
 import SplashScreen from '../../components/SplashScreen';
+import axios from 'axios';
 
 const DEFAULT_LOCATION = { lat: 37.566535, lon: 126.9779692 };
 
 const HomeContainer = () => {
   const [splashing, setSplashing] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [, setWeatherData] = useRecoilState(weatherData);
+  const [translatedText, setTranslatedText] = useState('위치');
+  const [weatherInfo, setWeatherInfo] = useRecoilState(weatherData);
   const [, setAirPollutionData] = useRecoilState(airPollutionData);
   const [, setWeeklyWeatherData] = useRecoilState(weeklyWeatherData);
   const [location, setLocation] = useState(DEFAULT_LOCATION);
@@ -31,22 +33,39 @@ const HomeContainer = () => {
     );
   };
 
+  const doTranslation = async (text: string) => {
+    try {
+      const { data } = await axios.post(
+        'https://todays-outfit.vercel.app/api/translate',
+        // https://openapi.naver.com/v1/papago/n2mt
+        // https://thingproxy.freeboard.io/fetch/
+
+        {
+          text: text,
+        },
+      );
+
+      setTranslatedText(data.message.result.translatedText);
+    } catch (error) {
+      console.error('Failed to translate text.', error);
+    }
+  };
+
   const getCurrentWeather = async () => {
     setLoading(true);
     fetchLocation();
     await weatherQuery.refetch();
     await pollutionQuery.refetch();
     await weeklyWeatherQuery.refetch();
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    doTranslation(weatherInfo ? weatherInfo.name : translatedText);
   };
 
   useEffect(() => {
     if (weatherQuery.data && pollutionQuery.data && weeklyWeatherQuery.data) {
-      setWeatherData(weatherQuery.data);
+      setWeatherInfo(weatherQuery.data);
       setAirPollutionData(pollutionQuery.data);
       setWeeklyWeatherData(weeklyWeatherQuery.data);
+      doTranslation(weatherQuery.data.name);
     }
   }, [weatherQuery.data, pollutionQuery.data, weeklyWeatherQuery.data]);
 
@@ -65,7 +84,7 @@ const HomeContainer = () => {
     return <Loading />;
   }
 
-  return <HomePresenter loading={loading} getCurrentWeather={getCurrentWeather} />;
+  return <HomePresenter loading={loading} translatedText={translatedText} getCurrentWeather={getCurrentWeather} />;
 };
 
 export default HomeContainer;
