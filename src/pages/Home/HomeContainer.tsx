@@ -44,8 +44,9 @@ const HomeContainer = () => {
           text: text,
         },
       );
-
-      setTranslatedText(data.message.result.translatedText);
+      const result = data.message.result.translatedText;
+      setTranslatedText(result);
+      return;
     } catch (error) {
       console.error('Failed to translate text.', error);
     }
@@ -54,10 +55,10 @@ const HomeContainer = () => {
   const getCurrentWeather = async () => {
     setLoading(true);
     fetchLocation();
-    await weatherQuery.refetch();
-    await pollutionQuery.refetch();
-    await weeklyWeatherQuery.refetch();
-    doTranslation(weatherInfo ? weatherInfo.name : translatedText);
+    weatherQuery.refetch();
+    pollutionQuery.refetch();
+    weeklyWeatherQuery.refetch();
+    await doTranslation(weatherInfo?.name ?? 'location');
     setLoading(false);
   };
 
