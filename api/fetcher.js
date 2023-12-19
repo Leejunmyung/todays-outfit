@@ -2,21 +2,23 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
-  const { url, params } = req.body;
+  const { text } = req.body;
 
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}${url}`,
+      `${process.env.REACT_APP_BASE_URL}${url}${text}`,
       {
         source: 'en',
         target: 'ko',
-        params: params,
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          'X-Naver-Client-Id': process.env.NAVER_CLIENT_ID,
-          'X-Naver-Client-Secret': process.env.NAVER_CLIENT_SECRET,
+        },
+        params: {
+          appid: `${process.env.REACT_APP_API_KEY}`,
+          units: 'metric',
+          lang: 'kr',
         },
       },
     );
