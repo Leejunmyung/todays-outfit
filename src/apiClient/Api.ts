@@ -1,4 +1,4 @@
-import { baseApi } from './Fetcher';
+import axios from 'axios';
 import { LocationParams } from './type';
 
 export const getCurrentWeather = async (locationParams: LocationParams) => {
@@ -6,7 +6,8 @@ export const getCurrentWeather = async (locationParams: LocationParams) => {
     lat: locationParams.lat,
     lon: locationParams.lon,
   };
-  const result = await baseApi.get(`/weather`, { params });
+  const url = '/weather';
+  const result = await axios.get(`https://todays-outfit.vercel.app/api/fetcher`, { url: url, params: params });
   return result.data;
 };
 
@@ -15,7 +16,8 @@ export const getCurrentPollution = async (locationParams: LocationParams) => {
     lat: locationParams.lat,
     lon: locationParams.lon,
   };
-  const result = await baseApi.get(`/air_pollution`, { params });
+  const url = '/air_pollution';
+  const result = await axios.get(`https://todays-outfit.vercel.app/api/fetcher`, { url: url, params: params });
   return result.data;
 };
 
@@ -25,6 +27,7 @@ export const getWeeklyWeather = async (locationParams: LocationParams) => {
     lon: locationParams.lon,
     exclude: 'current,minutely',
   };
-  const result = await baseApi.get(`/onecall`, { params });
+  const url = '/onecall';
+  const result = await axios.get(`https://todays-outfit.vercel.app/api/fetcher`, { url: url, params: params });
   return result.data;
 };

@@ -12,7 +12,6 @@ import {
 import { useRecoilValue } from 'recoil';
 import { weatherData } from '../../recoil/atom';
 import CarouselScroll from '../../components/CarouselScroll';
-import Translate from '../../components/Translate';
 import AdComponent from '../../components/AdComponent';
 import Spinner from '../../components/Spinner';
 interface HomePresenterProps {
