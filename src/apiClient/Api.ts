@@ -6,7 +6,7 @@ export const getCurrentWeather = async (locationParams: LocationParams) => {
     lat: locationParams.lat,
     lon: locationParams.lon,
   };
-  const text = locationParams.lat && locationParams.lon ? `?lat=${locationParams.lat}lon=${locationParams.lon}` : '';
+  const text = locationParams.lat && locationParams.lon ? `?lat=${locationParams.lat}&lon=${locationParams.lon}` : '';
   const url = '/weather';
   const result = await axios.post(`https://todays-outfit.vercel.app/api/fetcher`, { url: url, text: text });
   return result.data;
@@ -17,7 +17,7 @@ export const getCurrentPollution = async (locationParams: LocationParams) => {
     lat: locationParams.lat,
     lon: locationParams.lon,
   };
-  const text = locationParams.lat && locationParams.lon ? `?lat=${locationParams.lat}lon=${locationParams.lon}` : '';
+  const text = locationParams.lat && locationParams.lon ? `?lat=${locationParams.lat}&lon=${locationParams.lon}` : '';
   const url = '/air_pollution';
   const result = await axios.post(`https://todays-outfit.vercel.app/api/fetcher`, { url: url, text: text });
   return result.data;
@@ -31,7 +31,7 @@ export const getWeeklyWeather = async (locationParams: LocationParams) => {
   };
   const text =
     locationParams.lat && locationParams.lon
-      ? `?lat=${locationParams.lat}lon=${locationParams.lon}current,minutely`
+      ? `?lat=${locationParams.lat}&lon=${locationParams.lon}&current,minutely`
       : '';
   const url = '/onecall';
   const result = await axios.post(`https://todays-outfit.vercel.app/api/fetcher`, { url: url, text: text });
