@@ -2,10 +2,6 @@ import axios from 'axios';
 import { LocationParams } from './type';
 
 export const getCurrentWeather = async (locationParams: LocationParams) => {
-  const querys = {
-    lat: locationParams.lat,
-    lon: locationParams.lon,
-  };
   const url = '/weather';
   const text =
     locationParams.lat && locationParams.lon ? `${url}?lat=${locationParams.lat}&lon=${locationParams.lon}` : '';
@@ -14,10 +10,6 @@ export const getCurrentWeather = async (locationParams: LocationParams) => {
 };
 
 export const getCurrentPollution = async (locationParams: LocationParams) => {
-  const params = {
-    lat: locationParams.lat,
-    lon: locationParams.lon,
-  };
   const url = '/air_pollution';
   const text =
     locationParams.lat && locationParams.lon ? `${url}?lat=${locationParams.lat}&lon=${locationParams.lon}` : '';
@@ -26,11 +18,6 @@ export const getCurrentPollution = async (locationParams: LocationParams) => {
 };
 
 export const getWeeklyWeather = async (locationParams: LocationParams) => {
-  const params = {
-    lat: locationParams.lat,
-    lon: locationParams.lon,
-    exclude: 'current,minutely',
-  };
   const url = '/onecall';
   const text =
     locationParams.lat && locationParams.lon
